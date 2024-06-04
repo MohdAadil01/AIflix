@@ -7,6 +7,8 @@ import {
 } from "firebase/auth";
 import { auth } from "../firebase/config";
 import { validateForm } from "../utils/validateForm";
+import { useDispatch, useSelector } from "react-redux";
+import { login, signup } from "../store/userSlice.js";
 
 function Auth() {
   const [isLoginPage, setIsLoginPage] = useState(true);
@@ -14,6 +16,7 @@ function Auth() {
 
   const email = useRef();
   const password = useRef();
+  const dispatch = useDispatch();
 
   const submitFormHandler = (e) => {
     e.preventDefault();
@@ -30,7 +33,7 @@ function Auth() {
       )
         .then((userCredential) => {
           const user = userCredential.user;
-          console.log(user);
+          dispatch(login(user));
         })
         .catch((error) => {
           const errorMessage = error.message;
@@ -44,7 +47,7 @@ function Auth() {
       )
         .then((userCredential) => {
           const user = userCredential.user;
-          console.log(user);
+          dispatch(signup(user));
         })
         .catch((error) => {
           const errorMessage = error.message;
