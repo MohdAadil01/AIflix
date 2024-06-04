@@ -4,11 +4,13 @@ import {
   getAuth,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  updateProfile,
 } from "firebase/auth";
 import { auth } from "../firebase/config";
 import { validateForm } from "../utils/validateForm";
 import { useDispatch, useSelector } from "react-redux";
 import { login, signup } from "../store/userSlice.js";
+import { useNavigate } from "react-router-dom";
 
 function Auth() {
   const [isLoginPage, setIsLoginPage] = useState(true);
@@ -16,7 +18,9 @@ function Auth() {
 
   const email = useRef();
   const password = useRef();
+  const name = useRef();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const submitFormHandler = (e) => {
     e.preventDefault();
@@ -40,6 +44,7 @@ function Auth() {
               displayName: user.displayName,
             })
           );
+          navigate("/browse");
         })
         .catch((error) => {
           const errorMessage = error.message;
@@ -53,13 +58,23 @@ function Auth() {
       )
         .then((userCredential) => {
           const user = userCredential.user;
-          dispatch(
-            signup({
-              uid: user.uid,
-              email: user.email,
-              displayName: user.displayName,
+          updateProfile(user, {
+            displayName: name.current.value,
+          })
+            .then(() => {
+              dispatch(
+                signup({
+                  uid: user.uid,
+                  email: user.email,
+                  displayName: user.displayName,
+                })
+              );
+              navigate("/browse");
             })
-          );
+            .catch((error) => {
+              const errorMessage = error.message;
+              setErrorMessage(errorMessage);
+            });
         })
         .catch((error) => {
           const errorMessage = error.message;
@@ -80,6 +95,7 @@ function Auth() {
           {!isLoginPage && (
             <input
               type="text"
+              ref={name}
               placeholder="Full Name"
               className="w-full p-3 rounded-md bg-gray-700 placeholder-gray-500 text-white"
             />

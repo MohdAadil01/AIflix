@@ -5,12 +5,17 @@ import Browse from "./pages/Browse";
 import Layout from "./pages/Layout";
 import { Provider } from "react-redux";
 import store from "./store/store";
+import Home from "./pages/Home";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Layout />,
     children: [
+      {
+        path: "/",
+        element: <Home />,
+      },
       {
         path: "/auth",
         element: <Auth />,
