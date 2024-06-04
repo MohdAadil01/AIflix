@@ -14,5 +14,6 @@ const useFetchMovies = (url) => {
   useEffect(() => {
     fetchMovies();
   }, []);
+  return movies;
 };
 export default useFetchMovies;
