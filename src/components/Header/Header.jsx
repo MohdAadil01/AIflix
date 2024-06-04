@@ -5,12 +5,12 @@ import { Link } from "react-router-dom";
 function Header() {
   return (
     <div className="flex justify-between items-center px-8 py-4 bg-black">
-      <div className="logo">
+      <Link to={"/"} className="logo">
         <img src={LOGO} alt="Netflix Logo" className="w-24" />
-      </div>
+      </Link>
       <div>
         <Link
-          to="/login"
+          to="/auth"
           className="border border-transparent bg-red-600 px-4 py-2 rounded-md text-white text-sm font-semibold hover:bg-red-700"
         >
           Sign In

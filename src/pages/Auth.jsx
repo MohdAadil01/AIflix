@@ -1,11 +1,56 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { BACKGROUND_IMAGE } from "../assets/image";
-import { Link } from "react-router-dom";
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
+import { auth } from "../firebase/config";
+import { validateForm } from "../utils/validateForm";
 
-function Login() {
+function Auth() {
   const [isLoginPage, setIsLoginPage] = useState(true);
+  const [errorMessage, setErrorMessage] = useState(null);
+
+  const email = useRef();
+  const password = useRef();
+
   const submitFormHandler = (e) => {
     e.preventDefault();
+    const isFormValid = validateForm(email.current.value);
+    if (isFormValid) {
+      setErrorMessage(isFormValid);
+      return;
+    }
+    if (isLoginPage) {
+      signInWithEmailAndPassword(
+        auth,
+        email.current.value,
+        password.current.value
+      )
+        .then((userCredential) => {
+          const user = userCredential.user;
+          console.log(user);
+        })
+        .catch((error) => {
+          const errorMessage = error.message;
+          setErrorMessage(errorMessage);
+        });
+    } else {
+      createUserWithEmailAndPassword(
+        auth,
+        email.current.value,
+        password.current.value
+      )
+        .then((userCredential) => {
+          const user = userCredential.user;
+          console.log(user);
+        })
+        .catch((error) => {
+          const errorMessage = error.message;
+          setErrorMessage(errorMessage);
+        });
+    }
   };
   return (
     <div
@@ -17,20 +62,22 @@ function Login() {
           {isLoginPage ? "Sign In" : "Sign Up"}
         </h1>
         <form className="space-y-4" onSubmit={submitFormHandler}>
-          <input
-            type="text"
-            placeholder="Full Name"
-            className="w-full p-3 rounded-md bg-gray-700 placeholder-gray-500 text-white"
-          />
           {!isLoginPage && (
             <input
               type="text"
-              placeholder="Email"
+              placeholder="Full Name"
               className="w-full p-3 rounded-md bg-gray-700 placeholder-gray-500 text-white"
             />
           )}
           <input
+            type="text"
+            ref={email}
+            placeholder="Email"
+            className="w-full p-3 rounded-md bg-gray-700 placeholder-gray-500 text-white"
+          />
+          <input
             type="password"
+            ref={password}
             placeholder="Password"
             className="w-full p-3 rounded-md bg-gray-700 placeholder-gray-500 text-white"
           />
@@ -40,6 +87,11 @@ function Login() {
           >
             Sign In
           </button>
+          {errorMessage && (
+            <p className="w-full rounded-md text-red-600 font-bold">
+              {errorMessage}
+            </p>
+          )}
           {isLoginPage && (
             <>
               {" "}
@@ -67,4 +119,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default Auth;
