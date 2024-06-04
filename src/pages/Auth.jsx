@@ -33,7 +33,13 @@ function Auth() {
       )
         .then((userCredential) => {
           const user = userCredential.user;
-          dispatch(login(user));
+          dispatch(
+            login({
+              uid: user.uid,
+              email: user.email,
+              displayName: user.displayName,
+            })
+          );
         })
         .catch((error) => {
           const errorMessage = error.message;
@@ -47,7 +53,13 @@ function Auth() {
       )
         .then((userCredential) => {
           const user = userCredential.user;
-          dispatch(signup(user));
+          dispatch(
+            signup({
+              uid: user.uid,
+              email: user.email,
+              displayName: user.displayName,
+            })
+          );
         })
         .catch((error) => {
           const errorMessage = error.message;
