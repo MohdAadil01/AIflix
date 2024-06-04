@@ -1,5 +1,5 @@
 import React, { useRef, useState } from "react";
-import { BACKGROUND_IMAGE } from "../assets/image";
+import { BACKGROUND_IMAGE } from "../assets/const.js";
 import {
   getAuth,
   createUserWithEmailAndPassword,

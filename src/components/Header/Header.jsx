@@ -1,5 +1,5 @@
 import React from "react";
-import { LOGO } from "../../assets/image";
+import { LOGO } from "../../assets/const.js";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../store/userSlice.js";
@@ -14,9 +14,15 @@ function Header() {
     dispatch(logout());
     navigate("/");
   };
-  console.log(user);
+
+  const isAuthPage = window.location.pathname === "/auth";
+
   return (
-    <div className="flex justify-between items-center px-8 py-4 bg-black">
+    <div
+      className={`flex justify-between items-center px-8 py-4 ${
+        isAuthPage ? "absolute left-0 right-0  bg-transparent" : "bg-zinc-900"
+      }`}
+    >
       <Link to={"/"} className="logo">
         <img src={LOGO} alt="Netflix Logo" className="w-24" />
       </Link>
@@ -44,5 +50,4 @@ function Header() {
     </div>
   );
 }
-
 export default Header;
