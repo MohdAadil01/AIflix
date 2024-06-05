@@ -8,7 +8,6 @@ const useFetchMovies = (url) => {
     const response = await fetch(url, API_OPTIONS);
 
     const results = await response.json();
-
     setMovies(results.results);
   };
   useEffect(() => {
