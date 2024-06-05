@@ -10,7 +10,7 @@ import {
 } from "../store/movieSlice.js";
 import { useSelector } from "react-redux";
 import Hero from "../components/Browse/Hero.jsx";
-import MoviesList from "../components/Browse/MoviesList.jsx";
+import MovieLists from "../components/Browse/MovieLists.jsx";
 
 function Browse() {
   const dispatch = useDispatch();
@@ -28,7 +28,7 @@ function Browse() {
   return (
     <div>
       <Hero />
-      <MoviesList />
+      <MovieLists />
     </div>
   );
 }
