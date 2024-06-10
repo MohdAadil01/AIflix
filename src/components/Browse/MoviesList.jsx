@@ -2,7 +2,6 @@ import React from "react";
 import MovieCard from "./MovieCard";
 
 function MoviesList({ title, movies }) {
-  console.log(movies);
   return (
     <div className="p-4">
       <h1 className="text-2xl font-bol font-semibold tracking-wide mb-4">

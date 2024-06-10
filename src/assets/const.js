@@ -22,3 +22,16 @@ export const API_OPTIONS = {
 };
 
 export const TMDB_IMAGE_CDN = "https://image.tmdb.org/t/p/w500";
+
+export const LANG = [
+  {
+    language: "English",
+    buttonText: "Search",
+    placeholder: "What movie would you like to watch today? ",
+  },
+  {
+    language: "Hindi",
+    buttonText: "खोजें",
+    placeholder: "आज आप कौन सी फिल्म देखना चाहेंगे?",
+  },
+];

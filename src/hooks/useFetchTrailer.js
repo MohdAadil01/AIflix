@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useState, useEffect, useCallback } from "react";
 import { API_OPTIONS } from "../assets/const";
-import { addTrailer } from "../store/movieSlice.js";
+import { addTrailer } from "../store/movieSlice/index.js";
 
 const useFetchTrailer = (id) => {
   const dispatch = useDispatch();

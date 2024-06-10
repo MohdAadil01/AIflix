@@ -7,13 +7,16 @@ import {
   addPopularMovies,
   addTopRated,
   addUpcoming,
-} from "../store/movieSlice.js";
+} from "../store/movieSlice/index.js";
 import { useSelector } from "react-redux";
 import Hero from "../components/Browse/Hero.jsx";
 import MovieLists from "../components/Browse/MovieLists.jsx";
+import GPTPage from "./GPTPage.jsx";
 
 function Browse() {
   const dispatch = useDispatch();
+  const showGptPage = useSelector((state) => state.toggleGPT.showGptPage);
+  console.log(showGptPage);
 
   const nowPlayingMovies = useFetchMovies(FETCH_MOVIES_URL.nowPlaying);
   const popularMovies = useFetchMovies(FETCH_MOVIES_URL.popular);
@@ -27,8 +30,19 @@ function Browse() {
 
   return (
     <div>
-      <Hero />
-      <MovieLists />
+      {
+        <div>
+          {showGptPage ? (
+            <GPTPage />
+          ) : (
+            <>
+              {" "}
+              <Hero />
+              <MovieLists />{" "}
+            </>
+          )}
+        </div>
+      }
     </div>
   );
 }
