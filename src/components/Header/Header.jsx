@@ -4,8 +4,9 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../store/userSlice/index.js";
 import { useNavigate } from "react-router-dom";
-import { FaSearch } from "react-icons/fa"; // Import the search icon
+import { FaSearch } from "react-icons/fa";
 import { toggleGPT } from "../../store/GPT/index.js";
+import { changeLanguage } from "../../store/GPT/laguage.js";
 
 function Header() {
   const dispatch = useDispatch();
@@ -14,6 +15,7 @@ function Header() {
   const showGptPage = useSelector((state) => state.toggleGPT.showGptPage);
 
   const logoutHandler = () => {
+    localStorage.removeItem("accessToken");
     dispatch(logout());
     navigate("/");
   };
@@ -30,34 +32,39 @@ function Header() {
         <img src={LOGO} alt="Netflix Logo" className="w-24" />
       </Link>
       <div className="flex items-center space-x-4">
-        <div className="relative">
-          <select className="bg-zinc-800 text-white py-2 pl-4 pr-10 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-600 appearance-none">
-            {LANG.map((lang) => (
-              <option
-                key={lang.language}
-                value={lang.language}
-                className="text-zinc-400"
-              >
-                {lang.language}
-              </option>
-            ))}
-          </select>
-          <div className="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none">
-            <svg
-              className="h-4 w-4 text-white"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
+        {showGptPage && (
+          <div className="relative">
+            <select
+              className="bg-zinc-800 text-white py-2 pl-4 pr-10 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-600 appearance-none capitalize"
+              onChange={(e) => dispatch(changeLanguage(e.target.value))}
             >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M19 9l-7 7-7-7"
-              ></path>
-            </svg>
+              {LANG.map((lang) => (
+                <option
+                  key={lang.language}
+                  value={lang.language}
+                  className="text-zinc-400 capitalize"
+                >
+                  {lang.language}
+                </option>
+              ))}
+            </select>
+            <div className="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none">
+              <svg
+                className="h-4 w-4 text-white"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M19 9l-7 7-7-7"
+                ></path>
+              </svg>
+            </div>
           </div>
-        </div>
+        )}
         {user ? (
           <div className="flex space-x-4">
             <button

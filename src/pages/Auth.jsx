@@ -6,10 +6,10 @@ import {
   signInWithEmailAndPassword,
   updateProfile,
 } from "firebase/auth";
+import { useDispatch, useSelector } from "react-redux";
+import { login, signup } from "../store/userSlice/index.js";
 import { auth } from "../firebase/config";
 import { validateForm } from "../utils/validateForm";
-import { useDispatch, useSelector } from "react-redux";
-import { login, signup } from "../store/userSlice.js";
 import { useNavigate } from "react-router-dom";
 
 function Auth() {
@@ -44,6 +44,8 @@ function Auth() {
               displayName: user.displayName,
             })
           );
+          const accessToken = user.accessToken;
+          localStorage.setItem("accessToken", accessToken);
           navigate("/browse");
         })
         .catch((error) => {
@@ -69,6 +71,8 @@ function Auth() {
                   displayName: user.displayName,
                 })
               );
+              const accessToken = user.accessToken;
+              localStorage.setItem("accessToken", accessToken);
               navigate("/browse");
             })
             .catch((error) => {
