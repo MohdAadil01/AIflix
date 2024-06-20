@@ -19,11 +19,10 @@ This React.js application allows users to browse and watch movies. Additionally,
 
 ## Screenshots
 
-![Home Page](screenshots/home_page.png)
+![Screenshot 2024-06-20 112010](https://github.com/MohdAadil01/AIflix/assets/125737087/9cccc446-33ff-42c7-b1f6-cd52e7b7770e)
+![Screenshot 2024-06-20 112101](https://github.com/MohdAadil01/AIflix/assets/125737087/8ed70b64-7af5-4835-a419-7c7b7cf6c2b0)
+![Screenshot 2024-06-20 112154](https://github.com/MohdAadil01/AIflix/assets/125737087/ed60e561-5ca6-412d-bbff-411c5559fef2)
 
-![Movie Page](screenshots/movie_page.png)
-
-![Chat Page](screenshots/chat_page.png)
 
 ## Installation
 
