@@ -28,12 +28,12 @@ This React.js application allows users to browse and watch movies. Additionally,
 
 1. Clone the repository:
     ```bash
-    git clone https://github.com/yourusername/movie-watch-app.git
+    git clone https://github.com/yourusername/AIflix.git
     ```
 
 2. Navigate to the project directory:
     ```bash
-    cd movie-watch-app
+    cd AIflix
     ```
 
 3. Install the dependencies:
